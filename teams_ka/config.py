@@ -26,8 +26,7 @@ class Default_Config:
     self.maxMfaRetries = 3
 
     # user activity
-    # set to -1 for no reconnect
-    self.userReconnectDelay = -1
+    self.userReconnectDelay = 3
     self.refreshRate = 30
 
     # must be supplied via console or ini
@@ -84,7 +83,6 @@ class Config:
     iniPath = self._getinipath_()
       
     # get config
-    # config = self._getiniconfig_(iniPath)
     config = ConfigParser()
     if os.path.exists(iniPath):
       config.read(iniPath)
@@ -108,7 +106,6 @@ class Config:
     iniPath = self._getinipath_()
       
     # get config
-    # config = self._getiniconfig_(iniPath)
     config = ConfigParser()
     if os.path.exists(iniPath):
       config.read(iniPath)
@@ -193,7 +190,6 @@ class Config:
     iniPath = self._getinipath_()
       
     # get config
-    # config = self._getiniconfig_(iniPath)
     config = ConfigParser()
     if os.path.exists(iniPath):
       config.read(iniPath)

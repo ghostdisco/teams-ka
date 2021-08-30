@@ -30,7 +30,6 @@ class Display:
   def _print_(self):
     running = self._getRunningTimeFormatted_()
     consoleWidth = os.get_terminal_size().columns
-    ''.__contains__('error')
     action = self.connection.action
 
     # build exit 'button'

@@ -142,14 +142,6 @@ class Connection:
   #
   # region    HELPERS
   ###########################################################################
-  
-  def genCodeChallenge(self, sessionId):
-    seed = sessionId.replace('-', '')
-    E = 'E' if random.randint(0, 1) else '3'
-    S = 'S' if random.randint(0, 1) else '5'
-    I = 'I' if random.randint(0, 1) else '1'
-    G = 'G' if random.randint(0, 1) else '6'
-    return f'UND{E}R{S}{I}{E}{G}{E}n{seed}'
 
   @property
   def action(self):
@@ -589,60 +581,6 @@ class Connection:
         
         # still connected
         continue
-
-
-
-###########################
-# BEGIN OLD CODE:
-###########################
-
-
-    # wait for element indicative of a disconnected session
-    max = 20
-    i = 1
-    while (i < 20):
-      i += 1
-      try:
-
-        self.action = 'watching connection'
-
-        # wait for potential error modals
-        WebDriverWait(self.browser, refreshRate).until_not(EC.element_to_be_clickable((By.ID, Element.teamsButtonId)))
-
-        # teams not loaded
-        try:
-          # errorBox = self.browser.find_element_by_tag_name(Element.connectionErrorTagName)
-          # error = errorBox.find_elements_by_tag_name('span')[0].text
-          error = '\'Teams\' button not accessible'
-          self.action = f'disconnected: {error}'
-        except Exception as e:
-          self.action = 'disconnected'
-        
-        return Status.DISCONNECTED
-
-      except TimeoutException:
-        
-        # continue if no error modal found
-        pass
-
-      except Exception as e:
-        if self.browserIsOpen: return False
-        self.action = f'error: {e}'
-        return Status.DISCONNECTED
-
-      try:
-
-        # check if teams button exists
-        WebDriverWait(self.browser, 0).until(EC.element_to_be_clickable((By.ID, Element.teamsButtonId)))
-        self.browser.find_element_by_id(Element.teamsButtonId)
-
-        self.action = 'sending keepalive action'
-        self.keepAlive()
-            
-      except:
-
-        self.action = 'disconnected'
-        return Status.DISCONNECTED
 
   ###########################################################################
   # endregion
