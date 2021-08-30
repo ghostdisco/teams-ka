@@ -4,7 +4,6 @@
 
 # Windows Release
 ## Running
-INFO: Download and run the release executable. You may be prompted by Windows that the publisher is untrutsted, this is because I haven't spent $300 on an EV cert yet :/
 
 Pre-Requisites:
   * Mozilla Firefox
