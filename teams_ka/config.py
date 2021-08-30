@@ -198,7 +198,7 @@ class Config:
 
 
     dict = {
-      'verbose': bool(config.get('app', 'verbose')),
+      'verbose': config.getboolean('app', 'verbose'),
       'key': config.get('app', 'key'),
       'username': config.get('account', 'username'),
       'password': config.get('account', 'password'),
@@ -206,7 +206,7 @@ class Config:
       'loginDelay': config.getint('session', 'loginDelay'),
       'maxReconnects': config.getint('session', 'maxReconnects'),
       'maxMfaRetries': config.getint('session', 'maxMfaRetries'),
-      'interactive': bool(config.get('browser', 'interactive')),
+      'interactive': config.getboolean('browser', 'interactive'),
       'browserWidth': config.getint('browser', 'browserWidth'),
       'browserHeight': config.getint('browser', 'browserHeight'),
       'userReconnectDelay': config.getint('user', 'userReconnectDelay'),
