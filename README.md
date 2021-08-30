@@ -35,11 +35,6 @@ Once completing one of these steps you can continue to run teams-ka without prov
 
 <br>
 
-## Packaging
-Packaging for Windows is currently done manually by creating an sfx of all dependencies (including Mozilla Firefox binaries) and launches a cmd bootstrap.
-
-<br>
-
 # Mac OS/Linux Release (Coming Soon)
 ### Running
 
@@ -76,3 +71,8 @@ I'm currently working on a Makefile to assist in setting up a workspace. At the 
 
 # Building
 todo
+
+<br>
+
+# Packaging
+All packaging is currently done manually.
