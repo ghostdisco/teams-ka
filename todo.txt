@@ -1,0 +1,2 @@
+update connection.py private functions to _func_ naming
+add to all element searches TimeoutException and Exception -> self.error = e

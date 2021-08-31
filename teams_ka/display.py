@@ -42,7 +42,7 @@ class Display:
     display += f'{self.username} - {self.connection.status.value} - {action}'.center(consoleWidth)
     display +=  '\n\n'
     display += f' {(buttonWidth - 2) * "_"} '.center(consoleWidth)
-    display += f'| press enter to exit ({running}) |'.center(consoleWidth)
+    display += button.center(consoleWidth)
     display += f' {(buttonWidth - 2) * "‾"} '.center(consoleWidth)
     display +=  '\n'
 

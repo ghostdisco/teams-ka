@@ -133,6 +133,7 @@ class Connection:
     # local properties
     self.status = Status.PENDING
     self.browser = webdriver.Firefox
+    self.connectCount = -1
     
     # initialize browser
     self.open()
@@ -148,23 +149,29 @@ class Connection:
     return self._action
 
   @action.setter
-  def action(self, value, lvl=logging.INFO):
+  def action(self, value):
     self._action = f'{value[0].upper()}{value[1:]}'
-    
+
     msg = value
     if bool(self.user.username):
       msg = f'{self.user.username} - {msg}'
 
-    if lvl == logging.CRITICAL:
-      logger.critical(msg)
-    elif lvl == logging.ERROR:
-      logger.error(msg)
-    elif lvl == logging.WARNING:
-      logger.warning(msg)
-    elif lvl == logging.DEBUG:
-      logger.debug(msg)
-    else:
-      logger.info(msg)
+    logger.info(msg)
+
+  @property
+  def error(self):
+    return self._error
+
+  @error.setter
+  def error(self, value):
+    self._error = f'{value[0].upper()}{value[1:]}'
+    self._action = f'ERR: {value[0].upper()}{value[1:]}'
+
+    msg = value
+    if bool(self.user.username):
+      msg = f'{self.user.username} - {msg}'
+
+    logger.error(msg)
 
   @property
   def browserIsOpen(self):
@@ -217,9 +224,9 @@ class Connection:
 
     self.close()
 
-    if self.userReconnectDelay > -1:
+    if self.connectCount < self.options.maxReconnects:
       self.status = Status.PENDING
-      time.sleep(self.userReconnectDelay)
+      time.sleep(self.options.userReconnectDelay)
       self.reconnect()
     else:
       self.status = Status.TERMINATED
@@ -254,12 +261,10 @@ class Connection:
     self.connect()
 
     # reconnects
-    i = 0
-    while (i < self.options.maxReconnects):
+    while (self.connectCount < self.options.maxReconnects):
       if not self.browserIsOpen: return False
       self.action = f"reconnecting"
       self.connect()
-      i += 1
 
   ###########################################################################
   # endregion
@@ -268,6 +273,8 @@ class Connection:
   ###########################################################################
 
   def connect(self):
+
+    self.connectCount += 1
 
     i = 1
     retries = 3
@@ -278,7 +285,6 @@ class Connection:
         return Status.CLOSED
       
       self.login()
-      # self.launchRd()
 
       if self.whereami() == Location.CONNECTED:
         break
@@ -298,6 +304,7 @@ class Connection:
   #
   # region    WHEREAMI
   ###########################################################################
+
   def whereami(self):
 
     i = 1
@@ -379,7 +386,7 @@ class Connection:
       self.action = 'username not accepted or password box not found'
       return False
     except Exception as e:
-      if not self.browserIsOpen(): return False
+      if not self.browserIsOpen: return False
       self.action = f'username not accepted or password box not found: {e}'
       return False
 
@@ -403,15 +410,13 @@ class Connection:
       # check for bad password
       WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((By.ID, Element.badPasswordId)))
       return False
-
-      print()
     except:
 
       # exception means we couldn't find a bad password error
       return True
 
   
-  def pickAnAccount(self):
+  def pickAnAccount(self) -> bool:
 
     # check if user account cached in oauth SSO
     timeout = 5 * self.options.timeoutMultiplier
@@ -421,6 +426,7 @@ class Connection:
       usernameTile = oauthCache.find_elements_by_class_name('tile')[0]
       usernameTile.click()
       self.action = 'account is cached in oauth SSO'
+      return True
     except:
       return False
 
@@ -489,8 +495,6 @@ class Connection:
       self.exit('bad password!')
       return False
 
-    # if not self.passwordAccepted(): return False
-
     # retry mfa 3 times
     i = 0
     mfaSuccess = False
@@ -517,7 +521,7 @@ class Connection:
       return False
     except Exception as e:
       self.status = Status.FAILED
-      if not self.browserIsOpen(): return False
+      if not self.browserIsOpen: return False
       self.action = f'failed to load Teams: {e}'
       return False
 

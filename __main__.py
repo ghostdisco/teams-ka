@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
   # app logging
   logging.Formatter.converter = time.localtime if helpers.amDebugging else time.gmtime
-  logging.basicConfig(filename='teams-ka.log', level=logging.DEBUG if config.verbose else logging.WARNING, format='%(asctime)s %(name)s %(levelname)s: %(message)s')
+  logging.basicConfig(filename='teams-ka.log', level=logging.DEBUG if config.verbose else logging.INFO, format='%(asctime)s %(name)s %(levelname)s: %(message)s')
   logger = logging.getLogger(__name__)
   logger.info('MS Teams - Always Available!')
 
