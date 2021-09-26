@@ -17,16 +17,16 @@ Pre-Requisites:
       3. Download and run the .msi to install for all users
 
 First Run Option 1:
-  1. Extract the teams-ka.zip archive to the location you'd like it to run from.
-  2. Run the run.bat file to launch the embedded python instance and the teams-ka module. The app will immediately close, having created a teams-ka.ini file in the teams-ka folder.
-  3. Open the .ini file with a text editor and enter your username and password in the appropriate lines. Make sure to leave the 'key' field empty.
-  4. Run the teams-ka.exe file again, this time it will encrypt your password in the .ini file and launch.
+  1. Run teams-ka.exe. The app will immediately close, having created a teams-ka.ini file in the same folder.
+  2. Open the .ini file with a text editor and enter your username and password in the appropriate lines. Make sure to leave the 'key' field empty.
+  3. Run the teams-ka.exe file again, this time it will encrypt your password in the .ini file and launch.
 
 First Run Option 2:
-  1. Using your shell console of choice (CMD/PowerShell/ConEmu), ignore the .bat file and instead go to the teams-ka folder and run: 
-      * In CMD:  ```python.exe . -u [USERNAME] -p [PASSWORD]```
-      * In PowerShell: ```./python.exe . -u [USERNAME] -p [PASSWORD]```
-  2. The application will generate the .ini file then encrypt/store your password.
+  1. Using your shell console of choice (CMD/PowerShell/ConEmu), run: 
+      * In CMD:  ```teams-ka.exe -u [USERNAME] -p [PASSWORD]```
+      * In PowerShell: ```./teams-ka.exe -u [USERNAME] -p [PASSWORD]```
+  2. The application will generate the teams-ka.ini file then encrypt/store your password and continue to run in the console.
+  3. After this first run you can launch the teams-ka.exe normally and it will use the credentials in the .ini file.
 
 Once completing one of these steps you can continue to run teams-ka without providing your password. If you need to update your username or password in the future, you'll need to either:
   * Delete the teams-ka.ini file and perform the steps in 'First Run Option 1'.
