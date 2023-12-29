@@ -1,0 +1,110 @@
+{
+    "randomLoginModifierLimit": 30,
+    "randomStatusModifierLimit": 15,
+    "days": {
+        "default": {
+            "is_workday": false,
+            "use_default": false,
+            "login": "09:00",
+            "logout": "17:10",
+            "availability": {
+                "available": ["09:00-12:33", "13:10-17:40"],
+                "busy": [],
+                "dnd": [],
+                "away": ["12:33-13:10"],
+                "offline": []
+            }
+        },
+        "sun": {
+            "is_workday": false,
+            "use_default": false,
+            "login": null,
+            "logout": null,
+            "availability": {
+                "available": [],
+                "busy": [],
+                "dnd": [],
+                "away": [],
+                "offline": []
+            }
+        },
+        "mon": {
+            "is_workday": true,
+            "use_default": false,
+            "login": "09:00",
+            "logout": "17:43",
+            "availability": {
+                "available": ["11:30-12:02", "13:04-18:13"],
+                "busy": ["09:00-11:30"],
+                "dnd": [],
+                "away": ["12:02-13:04"],
+                "offline": []
+            }
+        },
+        "tue": {
+            "is_workday": true,
+            "use_default": true,
+            "login": null,
+            "logout": null,
+            "availability": {
+                "available": [],
+                "busy": [],
+                "dnd": [],
+                "away": [],
+                "offline": []
+            }
+        },
+        "wed": {
+            "is_workday": true,
+            "use_default": true,
+            "login": null,
+            "logout": null,
+            "availability": {
+                "available": [],
+                "busy": [],
+                "dnd": [],
+                "away": [],
+                "offline": []
+            }
+        },
+        "thu": {
+            "is_workday": true,
+            "use_default": true,
+            "login": null,
+            "logout": null,
+            "availability": {
+                "available": [],
+                "busy": [],
+                "dnd": [],
+                "away": [],
+                "offline": []
+            }
+        },
+        "fri": {
+            "is_workday": false,
+            "use_default": false,
+            "login": null,
+            "logout": null,
+            "availability": {
+                "available": [],
+                "busy": [],
+                "dnd": [],
+                "away": [],
+                "offline": []
+            }
+        },
+        "sat": {
+            "is_workday": false,
+            "use_default": false,
+            "login": null,
+            "logout": null,
+            "availability": {
+                "available": [],
+                "busy": [],
+                "dnd": [],
+                "away": [],
+                "offline": []
+            }
+        }
+    }
+}
